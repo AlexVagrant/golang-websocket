@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sample of websocket with golang</title>
+  </head>
+
+  <body>
+  </body>
+
+  <script src="https://jinkelajs.org/jinkela.js"></script>
+  <script src="https://jinkelajs.org/directives/on.js"></script>
+  <script>
+    var ws = new WebSocket('ws://localhost:7070/ws');
+    ws.addEventListener("message", (ms) => {
+      window.location.reload();
+    })
+
+    class Demo extends Jinkela {
+      click() {
+        ws.send("test send")
+        console.log("test send", ws) 
+      }
+      get template() {
+        return `
+        <div>
+          <input type="button" on-click="{click}" value="Click Me" />
+        </div>
+        `;
+      }
+    }
+
+    addEventListener('DOMContentLoaded', () => {
+      new Demo().to(document.body)
+    })
+  </script>
+
+</html>
